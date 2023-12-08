@@ -16,9 +16,12 @@ INSERT INTO `roles` (`role_name`) VALUES
 
 INSERT INTO `user_roles` (`user_id`, `role_id`) VALUES
                                                     (1, 1), -- admin 有 ROLE_ADMIN 角色
-                                                    (2, 2), -- userE 也有 ROLE_USER_E 角色
-                                                    (3, 3), -- userD 也有 ROLE_USER_D 角色
-                                                    (4, 4); -- userS 也有 ROLE_USER_S 角色
+                                                    (2, 2), -- userE 有 ROLE_USER_E 角色
+                                                    (3, 3), -- userD 有 ROLE_USER_D 角色
+                                                    (4, 4), -- userS 有 ROLE_USER_S 角色
+                                                    (1, 2), -- admin 有 ROLE_USER_E 角色
+                                                    (1, 3), -- admin 有 ROLE_USER_E 角色
+                                                    (1, 4); -- admin 有 ROLE_USER_S 角色
 
 INSERT INTO `department`(`dept_name`, `loc`) VALUES
                                             ('財務部','臺灣台北'),
