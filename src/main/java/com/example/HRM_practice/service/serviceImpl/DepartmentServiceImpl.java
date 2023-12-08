@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -27,25 +28,33 @@ public class DepartmentServiceImpl implements DepartmentService {
     //刪除部門
     @Override
     public void deleteDepartment(Integer deptId) {
-
+        departmentRepository.deleteById(deptId);
     }
 
     //修改部門資料
     @Override
     public Department updateDepartment(Integer deptId, Department department) {
-        return null;
+        Optional<Department> optionalDept = departmentRepository.findByDeptId(deptId);
+        if(!optionalDept.isPresent()){
+            return null;
+        }
+        Department dept = optionalDept.get();
+        dept.setDeptName(department.getDeptName());
+        dept.setLoc(department.getLoc());
+        return departmentRepository.save(dept);
     }
 
     //查詢全部部門
     @Override
     public List<Department> listALLDepartment() {
-        return null;
+        return departmentRepository.findAll();
     }
 
     //依照部門名稱模糊查詢
     @Override
     public List<Department> listDepartmentByName(String deptName) {
-        return null;
+        Optional<List<Department>> departmentOptional = departmentRepository.findByDeptNameContaining(deptName);
+        return departmentOptional.orElse(null);
     }
 
     //依照部門(id)查詢該部門的所有員工名單（不包括機敏資料 如 手機 地址等
