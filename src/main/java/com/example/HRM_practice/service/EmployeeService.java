@@ -15,7 +15,7 @@ public interface EmployeeService {
     public void deleteEmployee(Integer empId);
 
     //修改員工資料
-    public Employee updateEmployee(Employee employee);
+    public Employee updateEmployee(Integer empId, Employee employee);
 
     //查詢全部員工
     public List<Employee> listAllEmployee();
@@ -33,5 +33,5 @@ public interface EmployeeService {
     public List<Employee> listEmployeeBeforeDate(LocalDate hireDate);
 
     //查入值日期在傳入值之後
-    public List<Employee> listEmployeeAfterDate(LocalDate hiredate);
+    public List<Employee> listEmployeeAfterDate(LocalDate hireDate);
 }

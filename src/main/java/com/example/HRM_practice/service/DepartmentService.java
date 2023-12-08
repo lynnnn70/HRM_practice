@@ -14,7 +14,7 @@ public interface DepartmentService {
     public void deleteDepartment(Integer deptId);
 
     //修改部門資料
-    public Department updateDepartment(Department department);
+    public Department updateDepartment(Integer deptId, Department department);
 
     //查詢全部部門
     public List<Department> listALLDepartment();
