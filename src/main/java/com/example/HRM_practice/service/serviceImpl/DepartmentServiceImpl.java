@@ -1,7 +1,6 @@
 package com.example.HRM_practice.service.serviceImpl;
 
 import com.example.HRM_practice.model.entity.Department;
-import com.example.HRM_practice.model.entity.Employee;
 import com.example.HRM_practice.model.repository.DepartmentRepository;
 import com.example.HRM_practice.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     //新增部門
     @Override
     public Department addDepartment(Department department) {
-        return null;
+        Department department1 = new Department();
+        department1.setDeptName(department.getDeptName());
+        department1.setLoc(department.getLoc());
+        departmentRepository.save(department1);
+        return department1;
     }
 
     //刪除部門
@@ -47,7 +50,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     //依照部門(id)查詢該部門的所有員工名單（不包括機敏資料 如 手機 地址等
     @Override
-    public List<Employee> listEmployeeByDeptId(Integer deptId) {
+    public List<Department> listDepartmentByDeptId(Integer deptId) {
         return null;
     }
 }

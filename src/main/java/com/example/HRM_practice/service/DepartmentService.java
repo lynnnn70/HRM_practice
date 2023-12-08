@@ -23,7 +23,7 @@ public interface DepartmentService {
     public List<Department> listDepartmentByName(String deptName);
 
     //依照部門(id)查詢該部門的所有員工名單（不包括機敏資料 如 手機 地址等
-    public List<Employee> listEmployeeByDeptId(Integer deptId);
+    public List<Department> listDepartmentByDeptId(Integer deptId);
 
 
 
