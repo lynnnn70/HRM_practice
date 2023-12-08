@@ -37,8 +37,8 @@
 |-----------|-------------|---------------|---------------|
 | bigint    | emp_id      | NOT NULL (AI) | 員工 編號         |
 | bigint    | dept_id     | NOT NULL (FK) | 部門 編號         |
-| char (30) | e_name      | NOT NULL      | 員工 姓名         |
-| char (30) | e_job       | NOT NULL      | 員工 職稱         |
+| char (30) | emp_name      | NOT NULL      | 員工 姓名         |
+| char (30) | emp_job       | NOT NULL      | 員工 職稱         |
 | date      | hire_date   | NOT NULL      | 入職日           |
 | decimal   | sal         | NOT NULL      | 薪資            |
 | decimal   | comm        | -             | 佣金 commission |
