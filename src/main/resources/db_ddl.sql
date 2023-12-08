@@ -42,8 +42,8 @@ CREATE TABLE `department`(
 CREATE TABLE `employee`(
                             `emp_id` BIGINT NOT NULL AUTO_INCREMENT,
                             `dept_id`BIGINT NOT NULL,
-                            `e_name` VARCHAR(30) NOT NULL,
-                            `e_job` VARCHAR(30) NOT NULL,
+                            `emp_name` VARCHAR(30) NOT NULL,
+                            `emp_job` VARCHAR(30) NOT NULL,
                             `hire_date` DATE NOT NULL,
                             `sal` DECIMAL NOT NULL,
                             `comm` DECIMAL NOT NULL,

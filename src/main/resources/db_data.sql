@@ -30,7 +30,7 @@ INSERT INTO `department`(`dept_name`, `loc`) VALUES
                                             ('生管部','中國上海'),
                                             ('人資部','臺灣台北');
 
-INSERT INTO `employee`(`e_name`, `e_job`, `hire_date`, `sal`, `comm`, `dept_id` ) VALUES
+INSERT INTO `employee`(`emp_name`, `emp_job`, `hire_date`, `sal`, `comm`, `dept_id` ) VALUES
                      ('MARTIN','SALESMAN' ,STR_TO_DATE('1993-04-01','%Y-%m-%d'),40000.0,8000.0,3),
                      ('JOICE','ACCOUNTANT' ,STR_TO_DATE('1996-05-16','%Y-%m-%d'),42000.0,2000.0,1),
                      ('MAX','MANAGER' ,STR_TO_DATE('1975-11-25','%Y-%m-%d'),80000.0,8000.0,2),
