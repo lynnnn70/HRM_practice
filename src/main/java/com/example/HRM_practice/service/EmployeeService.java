@@ -18,7 +18,7 @@ public interface EmployeeService {
     public Employee updateEmployee(Integer empId, Employee employee);
 
     //查詢全部員工
-    public List<Employee> listAllEmployee();
+    public List<Employee> listAllEmployee(int page, int size);
 
     //依照員工姓名模糊查詢
     public List<Employee> listEmployeeByName(String empName);
