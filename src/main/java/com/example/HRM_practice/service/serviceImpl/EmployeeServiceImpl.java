@@ -82,18 +82,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     //查SAL大於傳入值的員工
     @Override
     public List<Employee> listEmployeeGreaterThanSal(Double sal) {
-        return null;
+        return employeeRepository.findBySalGreaterThan(sal);
     }
 
-    //查入值日期在傳入值之前
-    @Override
-    public List<Employee> listEmployeeBeforeDate(LocalDate hireDate) {
-        return null;
-    }
+    //查入職日期在傳入值之前
+//    @Override
+//    public List<Employee> listEmployeeBeforeDate(LocalDate hireDate) {
+//        return employeeRepository.findByHireDateBefore(hireDate);
+//    }
 
-    //查入值日期在傳入值之後
-    @Override
-    public List<Employee> listEmployeeAfterDate(LocalDate hireDate) {
-        return null;
-    }
+    //查入職日期在傳入值之後
+//    @Override
+//    public List<Employee> listEmployeeAfterDate(LocalDate hireDate) {
+//        return null;
+//    }
 }

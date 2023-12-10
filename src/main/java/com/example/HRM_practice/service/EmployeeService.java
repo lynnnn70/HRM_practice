@@ -30,8 +30,8 @@ public interface EmployeeService {
     public List<Employee> listEmployeeGreaterThanSal(Double sal);
 
     //查入值日期在傳入值之前
-    public List<Employee> listEmployeeBeforeDate(LocalDate hireDate);
+//    public List<Employee> listEmployeeBeforeDate(LocalDate hireDate);
 
     //查入值日期在傳入值之後
-    public List<Employee> listEmployeeAfterDate(LocalDate hireDate);
+//    public List<Employee> listEmployeeAfterDate(LocalDate hireDate);
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -53,6 +54,10 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.listEmployeeById(empId),HttpStatus.OK);
     }
 
+    @GetMapping("listEmployeeGreaterThanSal/{sal}")
+    public ResponseEntity<List<Employee>> listEmployeeGreaterThanSal(@PathVariable Double sal){
+        return new ResponseEntity<>(employeeService.listEmployeeGreaterThanSal(sal),HttpStatus.OK);
+    }
 
 
 
