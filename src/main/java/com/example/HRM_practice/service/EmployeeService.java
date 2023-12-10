@@ -24,7 +24,7 @@ public interface EmployeeService {
     public List<Employee> listEmployeeByName(String empName);
 
     //依照員工編號查詢
-    public List<Employee> listEmployeeById(Integer id);
+    public Employee listEmployeeById(Integer empId);
 
     //查SAL大於傳入值的員工
     public List<Employee> listEmployeeGreaterThanSal(Double sal);

@@ -42,4 +42,18 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> listAllEmployee(@PathVariable Integer page){
         return new ResponseEntity<>(employeeService.listAllEmployee(page, 2),HttpStatus.OK);
     }
+
+    @GetMapping("listEmployeeByName/{empName}")
+    public ResponseEntity<List<Employee>> listEmployeeByName(@PathVariable String empName){
+        return new ResponseEntity<>(employeeService.listEmployeeByName(empName),HttpStatus.OK);
+    }
+
+    @GetMapping("listEmployeeById/{empId}")
+    public ResponseEntity<Employee> listEmployeeById(@PathVariable Integer empId){
+        return new ResponseEntity<>(employeeService.listEmployeeById(empId),HttpStatus.OK);
+    }
+
+
+
+
 }

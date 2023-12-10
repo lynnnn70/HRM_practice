@@ -69,13 +69,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     //依照員工姓名模糊查詢
     @Override
     public List<Employee> listEmployeeByName(String empName) {
-        return null;
+        return employeeRepository.findAllByEmpNameContaining(empName);
     }
 
     //依照員工編號查詢
     @Override
-    public List<Employee> listEmployeeById(Integer id) {
-        return null;
+    public Employee listEmployeeById(Integer empId) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(empId);
+        return optionalEmployee.orElse(null);
     }
 
     //查SAL大於傳入值的員工
