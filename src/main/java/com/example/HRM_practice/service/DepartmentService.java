@@ -22,8 +22,6 @@ public interface DepartmentService {
     //依照部門名稱模糊查詢
     public List<Department> listDepartmentByName(String deptName);
 
-    //依照部門(id)查詢該部門的所有員工名單（不包括機敏資料 如 手機 地址等
-    public List<Department> listDepartmentByDeptId(Integer deptId);
 
 
 

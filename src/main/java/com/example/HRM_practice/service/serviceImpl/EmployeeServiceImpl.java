@@ -1,8 +1,10 @@
 package com.example.HRM_practice.service.serviceImpl;
 
 import com.example.HRM_practice.model.entity.Employee;
+import com.example.HRM_practice.model.entity.EmployeeDTO;
 import com.example.HRM_practice.model.repository.EmployeeRepository;
 import com.example.HRM_practice.service.EmployeeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,8 +12,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -96,4 +100,53 @@ public class EmployeeServiceImpl implements EmployeeService {
 //    public List<Employee> listEmployeeAfterDate(LocalDate hireDate) {
 //        return null;
 //    }
+
+    //依照部門(id)查詢該部門的所有員工名單（不包括機敏資料 如 手機 地址等
+    @Override
+    public List<EmployeeDTO> listEmployeeByDeptId(Integer deptId) {
+
+       return  employeeRepository.findEmployeesByDeptId(deptId);
+//       List<Employee> employeeList = employeeRepository.findEmployeeByDeptId(deptId);
+//        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+//
+//        // method 1
+//        for(Employee employee : employeeList){
+//            EmployeeDTO employeeDTO = new EmployeeDTO(new Object[]{
+//                employee.getEmpId(),
+//                employee.getDeptId(),
+//                employee.getEmpName(),
+//                employee.getEmpJob()
+//            });
+//
+//            employeeDTOList.add(employeeDTO);
+//
+//        }
+//
+//        // method 2 採用另外的建構子
+//        for(Employee employee : employeeList){
+//            EmployeeDTO employeeDTO = new EmployeeDTO(employee);
+//            employeeDTOList.add(employeeDTO);
+//        }
+//
+//        // method 3 stream map
+//        employeeList.stream().map(employee -> new EmployeeDTO(employee))
+//                .collect(Collectors.toList());
+//
+//        // method4 beanUtil (ECP)
+//        employeeList.stream().map(employee -> {
+//            EmployeeDTO dto = new EmployeeDTO();
+//            BeanUtils.copyProperties(employee,dto);
+//            return dto;
+//        }).collect(Collectors.toList());
+//
+//
+//        return employeeDTOList;
+
+    }
+
+
+
+
+
+
 }
