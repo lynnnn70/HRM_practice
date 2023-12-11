@@ -1,6 +1,8 @@
 package com.example.HRM_practice.service;
 
+import com.example.HRM_practice.model.entity.Department;
 import com.example.HRM_practice.model.entity.Employee;
+import com.example.HRM_practice.model.entity.EmployeeDTO;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
@@ -34,4 +36,7 @@ public interface EmployeeService {
 
     //查入值日期在傳入值之後
 //    public List<Employee> listEmployeeAfterDate(LocalDate hireDate);
+
+    //依照部門(id)查詢該部門的所有員工名單（不包括機敏資料 如 手機 地址等
+    public List<EmployeeDTO> listEmployeeByDeptId(Integer deptId);
 }

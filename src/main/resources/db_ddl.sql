@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS `department`;
 
 
 CREATE TABLE `users` (
-                         `user_id` BIGINT NOT NULL AUTO_INCREMENT,
+                         `user_id` INT NOT NULL AUTO_INCREMENT,
                          `user_name` VARCHAR(50) NOT NULL,
                          `password` VARCHAR(100) NOT NULL,
                          PRIMARY KEY (`user_id`),
@@ -18,14 +18,14 @@ CREATE TABLE `users` (
 );
 
 CREATE TABLE `roles` (
-                         `role_id` BIGINT NOT NULL AUTO_INCREMENT,
+                         `role_id` INT NOT NULL AUTO_INCREMENT,
                          `role_name` VARCHAR(50) NOT NULL,
                          PRIMARY KEY (`role_id`)
 );
 
 CREATE TABLE `user_roles` (
-                              `user_id` BIGINT NOT NULL,
-                              `role_id` BIGINT NOT NULL,
+                              `user_id` INT NOT NULL,
+                              `role_id` INT NOT NULL,
                               PRIMARY KEY (`user_id`, `role_id`),
                               FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
                               FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`)
@@ -33,15 +33,15 @@ CREATE TABLE `user_roles` (
 
 
 CREATE TABLE `department`(
-                             `dept_id`BIGINT NOT NULL AUTO_INCREMENT,
+                             `dept_id`INT NOT NULL AUTO_INCREMENT,
                              `dept_name` VARCHAR(10) NOT NULL,
                              `loc` VARCHAR(20) NOT NULL,
                              PRIMARY KEY (`dept_id`)
 );
 
 CREATE TABLE `employee`(
-                            `emp_id` BIGINT NOT NULL AUTO_INCREMENT,
-                            `dept_id`BIGINT NOT NULL,
+                            `emp_id` INT NOT NULL AUTO_INCREMENT,
+                            `dept_id` INT NOT NULL,
                             `emp_name` VARCHAR(30) NOT NULL,
                             `emp_job` VARCHAR(30) NOT NULL,
                             `hire_date` DATE NOT NULL,

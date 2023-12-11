@@ -1,18 +1,25 @@
 package com.example.HRM_practice.controller;
 
+import com.example.HRM_practice.model.entity.Department;
 import com.example.HRM_practice.model.entity.Employee;
+import com.example.HRM_practice.model.entity.EmployeeDTO;
 import com.example.HRM_practice.service.serviceImpl.EmployeeServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("api")
 public class EmployeeController {
+
+    private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
     @Autowired
     private EmployeeServiceImpl employeeService;
@@ -59,6 +66,15 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.listEmployeeGreaterThanSal(sal),HttpStatus.OK);
     }
 
+    @GetMapping("listEmployeeByDeptId/{deptId}")
+    public ResponseEntity<List<EmployeeDTO>> listEmployeeByDeptId(@PathVariable Integer deptId){
 
+        log.info("Attempting to find employees by deptId{}", deptId);
 
+        List<EmployeeDTO> employeeList = employeeService.listEmployeeByDeptId(deptId);
+
+        log.info("find {} successfully by deptId", employeeList);
+
+        return new ResponseEntity<>(employeeList, HttpStatus.OK);
+    }
 }

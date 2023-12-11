@@ -1,6 +1,7 @@
 package com.example.HRM_practice.model.repository;
 
 import com.example.HRM_practice.model.entity.Employee;
+import com.example.HRM_practice.model.entity.EmployeeDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,4 +25,17 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
     //查入職日期在傳入值之前
 //    @Query(value = "SELECT * FROM Employee e WHERE e.hireDate < :inputDate")
 //    List<Employee> findByHireDateBefore(@Param("hireDate")LocalDate hireDate);
+
+//    @Query(value = "SELECT e.emp_id, e.dept_id, e.emp_name, e.emp_job FROM employee e WHERE e.dept_id = :input", nativeQuery = true)
+//    List<Employee> findEmployeesByDeptId(@Param("input") Integer deptId);
+
+    @Query(value = "SELECT NEW com.example.HRM_practice.model.entity.EmployeeDTO(e.empId, e.deptId, e.empName, e.empJob) FROM Employee e WHERE  e.deptId = :deptId")
+    List<EmployeeDTO> findEmployeesByDeptId(@Param("deptId") Integer deptId);
+
+    //XXXX
+//    @Query(value = "SELECT NEW com.example.HRM_practice.model.entity.EmployeeDTO(e.emp_id, e.dept_id, e.emp_name, e.emp_job) FROM employee e WHERE  e.deptId = :deptId" , nativeQuery = true)
+//    List<EmployeeDTO> findEmployeesByDeptId(@Param("deptId") Integer deptId);
+
+
+    List<Employee> findEmployeeByDeptId(Integer deptId);
 }
