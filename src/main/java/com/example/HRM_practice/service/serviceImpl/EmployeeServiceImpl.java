@@ -65,7 +65,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Page<Employee> pageResult = employeeRepository.findAll(
                 PageRequest.of(page, //查詢的頁數 從0開始
                                size, //查詢的每頁筆數
-                        Sort.by("deptId").ascending())); //依照deptId 升冪排序
+                        Sort.by("empId").ascending())); //依照empId 升冪排序
 
         return pageResult.getContent();
     }
