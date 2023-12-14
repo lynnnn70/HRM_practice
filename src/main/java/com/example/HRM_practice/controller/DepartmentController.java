@@ -13,6 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin(origins = "http://localhost:5500") // 允許來自特定源的跨來源請求
+
 public class DepartmentController {
 
     public static final Logger log = LoggerFactory.getLogger(DepartmentController.class);

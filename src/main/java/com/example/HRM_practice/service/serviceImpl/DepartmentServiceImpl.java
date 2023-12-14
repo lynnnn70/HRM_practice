@@ -21,6 +21,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     //新增部門
     @Override
     public Department addDepartment(Department department) {
+        String deptName = department.getDeptName();
+        if(departmentRepository.findByDeptNameContaining(deptName).isPresent()){
+            return null;
+        }
         Department department1 = new Department();
         department1.setDeptName(department.getDeptName());
         department1.setLoc(department.getLoc());
