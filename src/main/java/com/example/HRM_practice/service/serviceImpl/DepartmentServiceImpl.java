@@ -1,14 +1,11 @@
 package com.example.HRM_practice.service.serviceImpl;
 
 import com.example.HRM_practice.model.entity.Department;
-import com.example.HRM_practice.model.entity.Employee;
 import com.example.HRM_practice.model.repository.DepartmentRepository;
-import com.example.HRM_practice.model.repository.EmployeeRepository;
 import com.example.HRM_practice.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

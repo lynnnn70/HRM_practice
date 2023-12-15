@@ -33,7 +33,7 @@ public class DepartmentController {
 
         Department addDepartment = departmentService.addDepartment((department));
         if(addDepartment == null){
-            log.info("Duplicate input");
+            log.info("Duplicate input:{}", department);
             return generateResponse(StatusCode.Duplicate, department.getDeptId());
         }
 
@@ -41,10 +41,9 @@ public class DepartmentController {
         objectCommonResponse.setBody(addDepartment);
 
         log.info("Department added successfully. Add department:{}", objectCommonResponse);
-        return new ResponseEntity<>(objectCommonResponse,HttpStatus.CREATED);
+        return generateResponse(StatusCode.OK, department.getDeptId());
     }
 //    public ResponseEntity<Department> addDepartment(@RequestBody Department department){
-//
 //        log.info("Attempting to add department with data:{}", department);
 //
 //        Department addedDepartment = departmentService.addDepartment(department);
@@ -53,7 +52,6 @@ public class DepartmentController {
 //        return
 //        }
 //        log.info("Department added successfully. Add department:{}", addedDepartment);
-//
 //        return new ResponseEntity<>(addedDepartment, HttpStatus.CREATED);
 //    }
 
