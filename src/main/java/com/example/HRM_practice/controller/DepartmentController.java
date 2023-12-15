@@ -80,7 +80,7 @@ public class DepartmentController {
             case OK:
                 return "success";
             case InvalidData:
-                return "Internal_Data";
+                return "Invalid_Input";
             case InternalError:
                 return "Internal_Error";
             case AccountUnavailable:
