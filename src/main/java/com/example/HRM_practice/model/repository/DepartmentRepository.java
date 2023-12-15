@@ -12,4 +12,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
     Optional<Department> findByDeptId(Integer deptId);
 
     Optional<List<Department>> findByDeptNameContaining(String deptName);
+
+    Optional<Department> findByDeptName(String deptName);
+
 }

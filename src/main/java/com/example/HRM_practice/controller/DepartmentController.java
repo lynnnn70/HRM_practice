@@ -1,5 +1,7 @@
 package com.example.HRM_practice.controller;
 
+import com.example.HRM_practice.common.CommonResponse;
+import com.example.HRM_practice.common.StatusCode;
 import com.example.HRM_practice.model.entity.Department;
 import com.example.HRM_practice.service.serviceImpl.DepartmentServiceImpl;
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -24,15 +27,72 @@ public class DepartmentController {
 
     //{}是佔位符，當訊息被寫入時{}將被替換為相應的值
     @PostMapping("addDepartment")
-    public ResponseEntity<Department> addDepartment(@RequestBody Department department){
+    public ResponseEntity<CommonResponse<?>> addDepartment(@RequestBody Department department){
 
-        log.info("Attempting to add department with data:{}", department);
+        log.info("Attempting to department with data:{}", department);
 
-        Department addedDepartment = departmentService.addDepartment(department);
+        Department addDepartment = departmentService.addDepartment((department));
+        if(addDepartment == null){
+            log.info("Duplicate input");
+            return generateResponse(StatusCode.Duplicate, department.getDeptId());
+        }
 
-        log.info("Department added successfully. Add department:{}", addedDepartment);
+        CommonResponse<Department> objectCommonResponse = new CommonResponse<>();
+        objectCommonResponse.setBody(addDepartment);
 
-        return new ResponseEntity<>(addedDepartment, HttpStatus.CREATED);
+        log.info("Department added successfully. Add department:{}", objectCommonResponse);
+        return new ResponseEntity<>(objectCommonResponse,HttpStatus.CREATED);
+    }
+//    public ResponseEntity<Department> addDepartment(@RequestBody Department department){
+//
+//        log.info("Attempting to add department with data:{}", department);
+//
+//        Department addedDepartment = departmentService.addDepartment(department);
+//        if(addedDepartment == null){
+//            log.info("add new department duplicate ");
+//        return
+//        }
+//        log.info("Department added successfully. Add department:{}", addedDepartment);
+//
+//        return new ResponseEntity<>(addedDepartment, HttpStatus.CREATED);
+//    }
+
+    private ResponseEntity<CommonResponse<?>> generateResponse(StatusCode statusCode, Integer deptId){
+        CommonResponse<?> response = new CommonResponse<>().setStatus(statusCode.getValue()).setErrorMessage(convertStatusToMessage(statusCode));
+
+        switch(statusCode){
+            case OK:
+                return ResponseEntity.created(URI.create("api/addDepartment" + deptId)).body(response);
+            case InvalidData:
+                return ResponseEntity.badRequest().body(response);
+            case InternalError:
+                return ResponseEntity.internalServerError().body(response);
+            case AccountUnavailable:
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+            case Duplicate:
+                return ResponseEntity.accepted().body(response);
+            default:
+                log.warn("unknown_status :{}", statusCode);
+                return ResponseEntity.internalServerError().body(response);
+        }
+    }
+
+    private String convertStatusToMessage(StatusCode statusCode){
+        switch (statusCode){
+            case OK:
+                return "success";
+            case InvalidData:
+                return "Internal_Data";
+            case InternalError:
+                return "Internal_Error";
+            case AccountUnavailable:
+                return "Account_Unavailable";
+            case Duplicate:
+                return "Duplicate";
+            default:
+                log.warn("unknown_status :{}", statusCode);
+                return "Unknown_Status";
+        }
     }
 
     @DeleteMapping("deleteDepartment/{deptId}")

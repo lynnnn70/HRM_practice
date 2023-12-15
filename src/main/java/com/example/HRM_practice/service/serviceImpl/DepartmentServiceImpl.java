@@ -22,7 +22,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department addDepartment(Department department) {
         String deptName = department.getDeptName();
-        if(departmentRepository.findByDeptNameContaining(deptName).isPresent()){
+        if(departmentRepository.findByDeptName(deptName).isPresent()){
             return null;
         }
         Department department1 = new Department();
