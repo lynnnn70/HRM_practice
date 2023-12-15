@@ -2,6 +2,7 @@ package com.example.HRM_practice.common;
 
 public enum StatusCode {
 
+    //enum列舉包含一系列可能的狀態碼
     OK(1),
     InvalidData(-1),
     InternalError(-2),
