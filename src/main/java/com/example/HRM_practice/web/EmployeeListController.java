@@ -71,4 +71,10 @@ public class EmployeeListController {
     //查入職日期在傳入值之前
 
     //查入職日期在傳入值之後
+
+    @GetMapping("index")
+    public String index(){
+        return "commons/commons";
+    }
+
 }
