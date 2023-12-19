@@ -22,15 +22,15 @@
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
 
-            <li class="nav-item d-block d-lg-none" th:insert="commons/commons.html :: searchIcon"></li>
+            <li class="nav-item d-block d-lg-none" th:replace="commons/commons.html :: searchIcon"></li>
             <!-- End Search Icon-->
 
             <li class="nav-item dropdown">
 
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown" th:insert="commons/commons.html :: notificationIcon"></a>
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown" th:replace="commons/commons.html :: notificationIcon"></a>
                 <!-- End Notification Icon -->
 
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" th:insert="commons/commons.html :: notificationDropDown"></ul>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" th:replace="commons/commons.html :: notificationDropDown"></ul>
                 <!-- End Notification Dropdown Items -->
 
             </li>
