@@ -22,4 +22,8 @@ public class DepartmentWebController {
     }
 
 
+    @GetMapping("departmentList")
+    public String departmentList(Model model){
+        return ("department/departmentList");
+    }
 }
