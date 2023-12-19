@@ -27,7 +27,7 @@ public class EmployeeListController {
             pageNum =  Integer.parseInt(page);
         }
         List<Employee> employees = employeeService.listAllEmployee(pageNum,2);
-        model.addAttribute("employeeAll", employees); //"對應html檔" ${}
+        model.addAttribute("employeeAll", employees); //"對應" ${}
 
         return "employee/employeeList"; //html檔路徑
     }
