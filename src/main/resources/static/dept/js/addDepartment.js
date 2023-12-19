@@ -19,7 +19,7 @@ function showWarnMsg(inputElement , message){
 
 $(document).ready(function(){
 
-    $("#deptSubmitBtn").on('click', function(e){
+    $("#deptSubmitBtn").on('click', function(e) {
 
         //將form表單預設行為先關閉
         e.preventDefault();
@@ -29,19 +29,24 @@ $(document).ready(function(){
         $(".error_message").remove();
 
         //按下Btn時先做輸入格式等錯誤處理
-        if(!isValid(inputDeptName_el)|| !isValid(inputDeptLoc_el)){
-            showWarnMsg(inputDeptName_el, "請填寫部門名稱");
-            showWarnMsg(inputDeptLoc_el, "請填寫部門地點");
+        if (!isValid(inputDeptName_el) || !isValid(inputDeptLoc_el)) {
+            if (!isValid(inputDeptName_el)) {
+                showWarnMsg(inputDeptName_el, "請填寫部門名稱");
+            }
+
+            if (!isValid(inputDeptLoc_el)) {
+                showWarnMsg(inputDeptLoc_el, "請填寫部門地點");
+            }
+
             control = false;
         }
 
-        //取得表單input資料
-        let deptNameValue = inputDeptName_el.val();
-        let deptLocValue = inputDeptLoc_el.val();
 
+
+        //取得表單input資料
         let data = {
-            deptName:deptNameValue,  //前 物件名稱 : 後 取到的值
-            loc:deptLocValue
+            deptName:inputDeptName_el.val(),  //前 物件名稱 : 後 取到的值
+            loc:inputDeptLoc_el.val()
         }
 
         if(control){
