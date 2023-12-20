@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("web/dept")
 public class DepartmentWebController {
@@ -24,6 +26,8 @@ public class DepartmentWebController {
 
     @GetMapping("departmentList")
     public String departmentList(Model model){
+        List<Department> departmentList = departmentService.listALLDepartment();
+        model.addAttribute("departmentList", departmentList);
         return ("department/departmentList");
     }
 }
