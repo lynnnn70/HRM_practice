@@ -16,7 +16,7 @@ function showWarnMsg(inputElement , message){
 }
 
 
-
+//.ready用途:確保HTML檔完全加載並解析後再執行相應的程式碼
 $(document).ready(function(){
 
     $("#deptSubmitBtn").on('click', function(e) {
