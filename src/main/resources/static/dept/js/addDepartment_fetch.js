@@ -85,7 +85,7 @@ $(document).ready(function(){
             // }))
 
             //2. async/await
-            // 如果使用 await，fetch 將會直接返回被解析的 Response 對象(最終結果) 更易讀
+            // 如果使用 await，fetch 將會直接返回被解析的 Response 對象(最終結果) 優點更易讀
             addDept(addurl, data);
         }
         async function addDept(addurl, data){
@@ -100,7 +100,7 @@ $(document).ready(function(){
                 if(resData.status === -6){
                     console.log("資料重複");
                     showWarnMsg(inputDeptName_el, "部門名稱重複");
-                }else if(resData){
+                }else if(resData.status === 1){
                     console.log("新增成功", resData);
                     Swal.fire({
                         position: "center",
