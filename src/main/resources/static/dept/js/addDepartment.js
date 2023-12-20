@@ -50,7 +50,7 @@ $(document).ready(function(){
         }
 
         if(control){
-            //使用AJAX發送請求
+            //使用AJAX發送請求(非同步)
             $.ajax({
                 url:'http://localhost:8080/api/addDepartment',
                 method:'POST',
