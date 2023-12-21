@@ -12,7 +12,7 @@ function isValid(inputElement){
 
 
 function hasSelectValue(){
-    if(selectedDeptId.val() === null){
+    if(selectedDeptId === null){
         return false;
     }
     return true;
@@ -37,23 +37,32 @@ $(document).ready(function (){
             control = false;
         }
 
-        let data ={
+        let data = {
             deptName: inputDeptName_el.val(),
             deptId: selectedDeptId
         }
 
         if(control){
+            // 獲取使用者輸入的中文部門名稱
+            let chineseDeptName = inputDeptName_el.val();
+            // 將中文部門名稱進行編碼
+            let encodedDeptName = encodeURIComponent(chineseDeptName);
+
             $.ajax({
-                url:'http://localhost:8080/api/departmentList',
+                url:`http://localhost:8080/api/listDepartmentByName/${encodedDeptName}`,
                 method: 'GET',
-                contentType: JSON.stringify(data),
                 success: function (response){
-
+                    console.log(response);
+                    if(response.status === -1){
+                        console.log("查無資料", response);
+                        showWarnMsg(inputDeptName_el, "查無此部門資料");
+                    }else if(response.status === 1)
+                    console.log(response);
+                },
+                error: function (error){
+                    console.log("查詢失敗", error);
                 }
-
-            })
-
-
+            });
         }
 
     })

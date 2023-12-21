@@ -34,14 +34,14 @@ public class DepartmentController {
         Department addDepartment = departmentService.addDepartment((department));
         if(addDepartment == null){
             log.info("Duplicate input:{}", department);
-            return generateResponse(StatusCode.Duplicate, department.getDeptId());
+            return generateResponse(StatusCode.Duplicate);
         }
 
         CommonResponse<Department> objectCommonResponse = new CommonResponse<>();
         objectCommonResponse.setBody(addDepartment);
 
         log.info("Department added successfully. Add department:{}", objectCommonResponse);
-        return generateResponse(StatusCode.OK, department.getDeptId());
+        return generateResponse(StatusCode.OK);
     }
 //    public ResponseEntity<Department> addDepartment(@RequestBody Department department){
 //        log.info("Attempting to add department with data:{}", department);
@@ -55,12 +55,12 @@ public class DepartmentController {
 //        return new ResponseEntity<>(addedDepartment, HttpStatus.CREATED);
 //    }
 
-    private ResponseEntity<CommonResponse<?>> generateResponse(StatusCode statusCode, Integer deptId){
+    private ResponseEntity<CommonResponse<?>> generateResponse(StatusCode statusCode){
         CommonResponse<?> response = new CommonResponse<>().setStatus(statusCode.getValue()).setErrorMessage(convertStatusToMessage(statusCode));
 
         switch(statusCode){
             case OK:
-                return ResponseEntity.created(URI.create("api/addDepartment" + deptId)).body(response);
+                return ResponseEntity.created(URI.create("api/addDepartment")).body(response); //RESTFUL風格
             case InvalidData:
                 return ResponseEntity.badRequest().body(response);
             case InternalError:
@@ -131,9 +131,13 @@ public class DepartmentController {
 
         List<Department> departmentList = departmentService.listDepartmentByName(deptName);
 
+        if(departmentList == null || departmentList.isEmpty()){
+            return new ResponseEntity<>(null, generateResponse(StatusCode.InvalidData).getStatusCode());
+        }
+
         log.info(("find {} successfully by deptName."), departmentList);
 
-        return new ResponseEntity<>(departmentList, HttpStatus.OK);
+        return new ResponseEntity<>(departmentList, generateResponse(StatusCode.OK).getStatusCode());
     }
 
 

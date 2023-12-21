@@ -10,6 +10,15 @@ function isValid(inputElement){
     return true;
 }
 
+function isValid(inputElement, message){
+    if(inputElement.val() === null || inputElement.val().trim() === ""){
+        showWarnMsg(inputElement , message)
+        return false;
+    }
+    return true;
+}
+
+
 //===== 判斷錯誤處理新增的文字 =====
 function showWarnMsg(inputElement , message){
     $("<span>").html(message).css("color", "red").addClass("error_message").insertAfter(inputElement);
@@ -28,16 +37,11 @@ $(document).ready(function(){
         //讓錯誤文字只顯示一次
         $(".error_message").remove();
 
+
+
         //按下Btn時先做輸入格式等錯誤處理
-        if (!isValid(inputDeptName_el) || !isValid(inputDeptLoc_el)) {
-            if (!isValid(inputDeptName_el)) {
-                showWarnMsg(inputDeptName_el, "請填寫部門名稱");
-            }
-
-            if (!isValid(inputDeptLoc_el)) {
-                showWarnMsg(inputDeptLoc_el, "請填寫部門地點");
-            }
-
+        if (!isValid(inputDeptName_el,"請填寫部門名稱") ||
+            !isValid(inputDeptLoc_el,"請填寫部門地點")) {
             control = false;
         }
 
@@ -60,7 +64,7 @@ $(document).ready(function(){
                     if(response.status === -6){
                         console.log("資料重複", response);
                         showWarnMsg(inputDeptName_el, "部門名稱重複");
-                    }else if(response){
+                    }else if(response.status === 1){
                         console.log("新增成功", response);
                         Swal.fire({
                             position: "center",
