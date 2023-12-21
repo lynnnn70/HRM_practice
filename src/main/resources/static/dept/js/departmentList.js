@@ -53,11 +53,12 @@ $(document).ready(function (){
                 method: 'GET',
                 success: function (response){
                     console.log(response);
-                    if(response.status === -1){
+
+
+                    if(!response){
                         console.log("查無資料", response);
                         showWarnMsg(inputDeptName_el, "查無此部門資料");
-                    }else if(response.status === 1)
-                    console.log(response);
+                    }
                 },
                 error: function (error){
                     console.log("查詢失敗", error);

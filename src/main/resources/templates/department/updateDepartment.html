@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
     <title>HRMM_Template</title>
     <th:block th:replace="commons/commons.html :: headerfiles"></th:block>
     <th:block th:replace="commons/commons.html :: headCssLink"></th:block>
@@ -54,7 +57,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="/assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Maria Hudson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -68,7 +71,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="/assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Anna Nelson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -82,7 +85,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="/assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                            <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>David Muldon</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -105,7 +108,7 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
                 </a><!-- End Profile Iamge Icon -->
 
@@ -237,110 +240,56 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>部門查詢</h1>
+        <h1>部門修改</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                 <li class="breadcrumb-item">部門管理</li>
-                <li class="breadcrumb-item active">部門查詢</li>
+                <li class="breadcrumb-item active">部門修改</li>
             </ol>
         </nav>
     </div>
     <!-- ***************End Page Title*************** -->
 
-    <section class="section">
-        <div class="row">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">部門列表</h5>
-
-                    <div class="container">
-                        <div class="row">
-                            <label for="inputDeptName" class="col-lg-1 col-form-label">部門名稱</label>
-                            <div class="col-lg-4">
-                                <input type="text" class="form-control " style="width: 330px;" id="inputDeptName">
-                            </div>
-                            <!-- End NameSearch Bar -->
-
-                            <div class="col-lg-6 ms-3">
-                                <div class="row ms-4">
-                                    <label class="col-lg-2 col-form-label">部門編號</label>
-                                    <div class="col-lg-8">
-                                        <select class="form-select" id="deptId_select" name="deptId_select" aria-label="Default select example"  style="width: 350px;">
-                                            <option selected>請選擇</option>
-                                            <option th:each="department: ${departmentList}" th:value="${department.deptId}" th:text="${department.deptName}"></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- form-select End -->
-                        </div>
-
-
-                    </div>
-                    <div class="container">
-                        <div class="d-grid gap-2 mt-3">
-                            <button class="btn btn-primary" type="button" id="search_button">搜尋  <i class="fa-solid fa-magnifying-glass"></i></button>
-                        </div>
-                    </div>
-
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="d-flex align-items-center">
+                    <h5 class="card-title">部門資料修改</h5>
                 </div>
-
-
-
-                <!-- Bordered Table -->
-                <div class="table-responsive">
-                    <table class="table table-bordered mt-4">
-                        <thead>
-                        <tr>
-                            <th scope="col" class="col-lg-1">#</th>
-                            <th scope="col" class="col-lg-3">部門編號</th>
-                            <th scope="col" class="col-lg-3">部門名稱</th>
-                            <th scope="col" class="col-lg-3">部門地點</th>
-                            <th scope="col" class="col-lg-2">修改</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>A111</td>
-                            <td>Sherry</td>
-                            <td>Specialist</td>
-                            <td><i class="fa-regular fa-pen-to-square"></i></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>B666</td>
-                            <td>Grace</td>
-                            <td>Manager</td>
-                            <td>icon</td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-                    <!-- End Bordered Table -->
-                    <div class="mt-3">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link">Previous</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <!-- End pagination -->
-
-
             </div>
+
+            <form th:object="${department}"  th:method="post" th:action="@{/web/dept/updateDepartment}">
+
+            <div class="row mb-3">
+                <label for="inputDeptName" class="col-sm-2 col-form-label">部門編號</label>
+                <div class="col-sm-6">
+                    <th scope="col" class="col-lg-6" th:text="${department.deptId}"></th>
+                    <input type="hidden" th:field="*{deptId}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputDeptName" class="col-sm-2 col-form-label">部門名稱</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="inputDeptName" th:field="*{deptName}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputDeptLoc" class="col-sm-2 col-form-label">部門地點</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="inputDeptLoc" th:field="*{loc}">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary" id="deptSubmitBtn">確認修改</button>
+                </div>
+            </div>
+            </form>
+
         </div>
-    </section>
+    </div>
 
 </main><!-- End #main -->
 
@@ -353,8 +302,6 @@
         class="bi bi-arrow-up-short"></i></a>
 
 <th:block th:replace="commons/commons.html :: CommonsImportScript"></th:block>
-<script th:src="@{/dept/js/departmentList.js}"></script>
-
 </body>
 
 </html>

@@ -22,6 +22,9 @@ public interface DepartmentService {
     //依照部門名稱模糊查詢
     public List<Department> listDepartmentByName(String deptName);
 
+    //依照部門Id查詢
+    public Department listDepartmentById(Integer deptId);
+
 
 
 

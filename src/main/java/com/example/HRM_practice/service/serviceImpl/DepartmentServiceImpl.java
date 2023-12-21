@@ -61,6 +61,12 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentOptional.orElse(null);
     }
 
+    //依照部門Id查詢
+    @Override
+    public Department listDepartmentById(Integer deptId) {
+        Optional<Department> optional = departmentRepository.findByDeptId(deptId);
+        return optional.orElse(null);
+    }
 
 
 }

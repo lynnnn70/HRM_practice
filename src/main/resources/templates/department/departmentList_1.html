@@ -267,7 +267,7 @@
                                     <label class="col-lg-2 col-form-label">部門編號</label>
                                     <div class="col-lg-8">
                                         <select class="form-select" id="deptId_select" name="deptId_select" aria-label="Default select example"  style="width: 350px;">
-                                            <option selected>請選擇</option>
+                                            <option selected value="-1" >查詢全部</option>
                                             <option th:each="department: ${departmentList}" th:value="${department.deptId}" th:text="${department.deptName}"></option>
                                         </select>
                                     </div>
@@ -301,19 +301,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr th:each="">
                             <th scope="row">1</th>
                             <td>A111</td>
                             <td>Sherry</td>
                             <td>Specialist</td>
                             <td><i class="fa-regular fa-pen-to-square"></i></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>B666</td>
-                            <td>Grace</td>
-                            <td>Manager</td>
-                            <td>icon</td>
                         </tr>
 
                         </tbody>
@@ -353,7 +346,7 @@
         class="bi bi-arrow-up-short"></i></a>
 
 <th:block th:replace="commons/commons.html :: CommonsImportScript"></th:block>
-<script th:src="@{/dept/js/departmentList.js}"></script>
+<script th:src="@{/dept/js/departmentList_1.js}"></script>
 
 </body>
 
