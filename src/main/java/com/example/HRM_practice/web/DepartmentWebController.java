@@ -30,4 +30,11 @@ public class DepartmentWebController {
         model.addAttribute("departmentList", departmentList);
         return ("department/departmentList");
     }
+
+    @GetMapping("departmentList1")
+    public String departmentList1(Model model){
+        List<Department> departmentList = departmentService.listALLDepartment();
+        model.addAttribute("departmentList", departmentList);
+        return ("department/departmentList_1");
+    }
 }

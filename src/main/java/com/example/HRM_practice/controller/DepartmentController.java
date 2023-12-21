@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -132,12 +133,40 @@ public class DepartmentController {
         List<Department> departmentList = departmentService.listDepartmentByName(deptName);
 
         if(departmentList == null || departmentList.isEmpty()){
-            return new ResponseEntity<>(null, generateResponse(StatusCode.InvalidData).getStatusCode());
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
 
         log.info(("find {} successfully by deptName."), departmentList);
 
-        return new ResponseEntity<>(departmentList, generateResponse(StatusCode.OK).getStatusCode());
+        return new ResponseEntity<>(departmentList, HttpStatus.OK);
+    }
+
+    @GetMapping("listDepartmentById/{deptId}")
+    public ResponseEntity<Department> listDepartmentById(@PathVariable Integer deptId){
+        log.info("Attemping to find department by deptId{}", deptId);
+
+        Department department = departmentService.listDepartmentById(deptId);
+
+        log.info("find{} successfully by deptId", deptId);
+        return new ResponseEntity<>(department, HttpStatus.OK);
+    }
+
+    //如果 HTTP 請求中不存在 selectAll 的參數， Spring 會將 selectAll 設置為 Java 中 boolean 的默認值 false。
+    @GetMapping("listDepartmentById2")
+    public ResponseEntity<List<Department>> listDepartmentById2(@RequestParam(name = "id", required = false)Integer deptId,
+                                                          @RequestParam(name = "selectAll" , required = false) boolean selectAll){
+
+        log.info("Attemping to find department by deptId{}", deptId);
+        List<Department> departmentList;
+        //如果selectAll存在
+        if(selectAll){
+            departmentList = departmentService.listALLDepartment();
+        }else{
+            Department department = departmentService.listDepartmentById(deptId);
+            departmentList = Arrays.asList(department);   //物件轉成List
+        }
+        log.info("find{} successfully by deptId", deptId);
+        return new ResponseEntity<>(departmentList, HttpStatus.OK);
     }
 
 
