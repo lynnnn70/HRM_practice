@@ -36,7 +36,7 @@ public class EmployeeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //Todo: 沒update成功
+
     @PutMapping("updateEmployee/{empId}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Integer empId,
                                                    @RequestBody Employee employee){
