@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("web/emp")
-public class EmployeeListController {
+public class EmployeeWebController {
 
     @Autowired
     private EmployeeServiceImpl employeeService;
