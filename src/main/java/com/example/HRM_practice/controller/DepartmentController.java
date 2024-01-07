@@ -35,14 +35,14 @@ public class DepartmentController {
         Department addDepartment = departmentService.addDepartment((department));
         if(addDepartment == null){
             log.info("Duplicate input:{}", department);
-            return generateResponse(StatusCode.Duplicate);
+            return generateResponse(StatusCode.Duplicate, department.getDeptId());
         }
 
         CommonResponse<Department> objectCommonResponse = new CommonResponse<>();
         objectCommonResponse.setBody(addDepartment);
 
         log.info("Department added successfully. Add department:{}", objectCommonResponse);
-        return generateResponse(StatusCode.OK);
+        return generateResponse(StatusCode.OK, department.getDeptId());
     }
 //    public ResponseEntity<Department> addDepartment(@RequestBody Department department){
 //        log.info("Attempting to add department with data:{}", department);
@@ -56,12 +56,12 @@ public class DepartmentController {
 //        return new ResponseEntity<>(addedDepartment, HttpStatus.CREATED);
 //    }
 
-    private ResponseEntity<CommonResponse<?>> generateResponse(StatusCode statusCode){
+    private ResponseEntity<CommonResponse<?>> generateResponse(StatusCode statusCode, Integer deptId){
         CommonResponse<?> response = new CommonResponse<>().setStatus(statusCode.getValue()).setErrorMessage(convertStatusToMessage(statusCode));
 
         switch(statusCode){
             case OK:
-                return ResponseEntity.created(URI.create("api/addDepartment")).body(response); //RESTFUL風格
+                return ResponseEntity.created(URI.create("api/addDepartment" + deptId)).body(response);
             case InvalidData:
                 return ResponseEntity.badRequest().body(response);
             case InternalError:
@@ -132,40 +132,8 @@ public class DepartmentController {
 
         List<Department> departmentList = departmentService.listDepartmentByName(deptName);
 
-        if(departmentList == null || departmentList.isEmpty()){
-            return new ResponseEntity<>(null, HttpStatus.OK);
-        }
-
         log.info(("find {} successfully by deptName."), departmentList);
 
-        return new ResponseEntity<>(departmentList, HttpStatus.OK);
-    }
-
-    @GetMapping("listDepartmentById/{deptId}")
-    public ResponseEntity<Department> listDepartmentById(@PathVariable Integer deptId){
-        log.info("Attemping to find department by deptId{}", deptId);
-
-        Department department = departmentService.listDepartmentById(deptId);
-
-        log.info("find{} successfully by deptId", deptId);
-        return new ResponseEntity<>(department, HttpStatus.OK);
-    }
-
-    //如果 HTTP 請求中不存在 selectAll 的參數， Spring 會將 selectAll 設置為 Java 中 boolean 的默認值 false。
-    @GetMapping("listDepartmentById2")
-    public ResponseEntity<List<Department>> listDepartmentById2(@RequestParam(name = "id", required = false)Integer deptId,
-                                                          @RequestParam(name = "selectAll" , required = false) boolean selectAll){
-
-        log.info("Attemping to find department by deptId{}", deptId);
-        List<Department> departmentList;
-        //如果selectAll存在
-        if(selectAll){
-            departmentList = departmentService.listALLDepartment();
-        }else{
-            Department department = departmentService.listDepartmentById(deptId);
-            departmentList = Arrays.asList(department);   //物件轉成List
-        }
-        log.info("find{} successfully by deptId", deptId);
         return new ResponseEntity<>(departmentList, HttpStatus.OK);
     }
 

@@ -1,6 +1,6 @@
 package com.example.HRM_practice.common;
 
-import com.sun.istack.internal.NotNull;
+import com.sun.istack.NotNull;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 public class CommonResponse<T> {
