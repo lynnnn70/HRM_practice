@@ -1,4 +1,4 @@
-package com.example.HRM_practice.security;
+package com.example.HRM_practice.security.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
