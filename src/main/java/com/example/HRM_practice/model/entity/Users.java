@@ -1,6 +1,9 @@
 package com.example.HRM_practice.model.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -36,6 +39,7 @@ public class Users {
     //確保初始化時 roles屬性不為null，而被初始化為一個空的HashSet
     //ManyToMany描述兩個實體的多對多關係，關聯的屬性應該是一個集合，因此要將此屬性用集合Set包裝，才能正確反映多對多的本質
     private Set<Roles> roles = new HashSet<>();
+
 
     public Integer getUserId() {
         return userId;
@@ -85,6 +89,10 @@ public class Users {
     }
 
     public Users() {
+    }
+
+    public Set<Roles> getRoles() {
+        return roles;
     }
 
 }
