@@ -30,15 +30,11 @@ public class CustomUsersDetailService implements UserDetailsService {
                 "{noop}" + users.getPassword(), getAuthorities(users));
     }
 
-    //用於提供該用戶授權權限集合
-    //@return 用戶被授權的權限集合
-    //將分配給用戶的角色轉換為 GrantedAuthority 對象的集合
-    public Collection<? extends GrantedAuthority> getAuthorities(Users users){
-        //用Java流 將用戶的每個角色映射為一個 SimpleGrantedAuthority 對象，該對象實現了 GrantedAuthority 接口，結果收集到一個列表並返回
-        return users.getRoles().stream()
-                .map(roles -> new SimpleGrantedAuthority(roles.getRoleName()))
+    private Collection<? extends GrantedAuthority> getAuthorities(Users user) {
+        return user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
                 .collect(Collectors.toList());
-    }
 
+    }
 
 }
