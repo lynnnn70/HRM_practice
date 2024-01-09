@@ -2,17 +2,14 @@ package com.example.HRM_practice.web;
 
 import com.example.HRM_practice.model.entity.Users;
 import com.example.HRM_practice.security.CustomUsersDetailService;
-import com.example.HRM_practice.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.ui.Model;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class MainController {
@@ -40,10 +37,10 @@ public class MainController {
         UsernamePasswordAuthenticationToken user = (UsernamePasswordAuthenticationToken) principal;
         log.info("登入資訊 :{}", user);
         log.info("登入資訊name :{}", user.getName());
-        log.info("登入資訊credentials :{}", user.getCredentials());
+        log.info("登入資訊credentials :{}", user.getCredentials()); //獲取用戶輸入的密碼字符串
         log.info("登入資訊principal :{}", user.getPrincipal());
-        Users userPrincipal = (Users) user.getPrincipal();
-        log.info("UserPrincipal 授權的ROLE :{}", userPrincipal.getAuthorities());
+        Users userPrincipal = (Users) user.getPrincipal();    //獲取代表當前用戶的資訊
+        log.info("UserPrincipal 授權的ROLE :{}", userPrincipal.getAuthorities()); //獲取授權資料
         log.info("UserPrincipal 帳號 :{}", userPrincipal.getUserName());
         log.info("UserPrincipal 密碼 :{}", userPrincipal.getPassword());
 
