@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,7 +21,7 @@ public class SecurityConfiguration {
                 .antMatchers("/admin/**").hasRole("ADMIN")                   //設定只有ROLE_ADMIN權限能訪問的路徑
                 .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")  //設定有ROLE_ADMIN or ROLE_USER權限能訪問的路徑
                 .antMatchers("/", "/home", "/login").permitAll())       //設定所有人可訪問的路徑
-            .formLogin(form -> form
+            .formLogin(form -> form                                           //表單提交
                 .loginPage("/login")                                          //設定login路徑
                 .permitAll())
             .logout(logout -> logout
@@ -58,4 +59,9 @@ public class SecurityConfiguration {
 //                );
 //        return httpSecurity.build();
 //    }
+    //建立密碼演算的實例
+    @Bean
+    public PasswordEncoder getPasswordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 }
