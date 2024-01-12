@@ -8,8 +8,8 @@ public class ValidateUtil {
     public static  final String PASSWORD_REGEX = "^[a-zA-Z0-9]{5,30}$";
 
 
-    public static boolean isUserNameCorrect(String account){
-        return account != null && Pattern.compile(USERNAME_REGEX).matcher(account).matches();
+    public static boolean isUserNameCorrect(String userName){
+        return userName != null && Pattern.compile(USERNAME_REGEX).matcher(userName).matches();
     }
 
     public static boolean isPasswordCorrect(String password){
