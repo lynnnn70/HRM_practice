@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS `user_roles`;
 DROP TABLE IF EXISTS `employee`;
 DROP TABLE IF EXISTS `department`;
 
-
+-- #UNIQUEKEY待確認
 CREATE TABLE `users` (
                          `user_id` INT NOT NULL AUTO_INCREMENT,
                          `user_name` VARCHAR(50) NOT NULL,
