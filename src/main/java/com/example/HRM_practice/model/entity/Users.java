@@ -1,9 +1,15 @@
 package com.example.HRM_practice.model.entity;
+//
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -37,6 +43,7 @@ public class Users {
     //ManyToMany描述兩個實體的多對多關係，關聯的屬性應該是一個集合，因此要將此屬性用集合Set包裝，才能正確反映多對多的本質
     private Set<Roles> roles = new HashSet<>();
 
+
     public Integer getUserId() {
         return userId;
     }
@@ -49,13 +56,53 @@ public class Users {
         return userName;
     }
 
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return null;
+//    }
+//    //用於提供該用戶授權權限集合
+//    //@return 用戶被授權的權限集合
+//    //將分配給用戶的角色轉換為 GrantedAuthority 對象的集合
+//    public Collection<? extends GrantedAuthority> getAuthorities(Users users){
+//        //用Java流 將用戶的每個角色映射為一個 SimpleGrantedAuthority 對象，該對象實現了 GrantedAuthority 接口，結果收集到一個列表並返回
+//        return users.getRoles().stream()
+//                .map(roles -> new SimpleGrantedAuthority(roles.getRoleName()))
+//                .collect(Collectors.toList());
+//    }
+
     public String getPassword() {
         return password;
     }
+
+//    @Override
+//    public String getUsername() {
+//        return null;
+//    }
+
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return false;
+//    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -86,5 +133,10 @@ public class Users {
 
     public Users() {
     }
+
+    public Set<Roles> getRoles() {
+        return roles;
+    }
+
 
 }

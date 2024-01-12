@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Welcome to the Home Page</h1>
+<div class="showData" sec:authorize="isAuthenticated()">
+    <h2>你的帳號是 :<span sec:authentication="principal.username"></span> </h2>
+    <a th:href="@{/logout}">登出</a>
+</div>
+<div class="showData" sec:authorize="isAnonymous()">
+    <h2>尚未未登入</h2>
+    <a th:href="@{/login}">登入</a>
+</div>
+<p><a th:href="@{/user}">User Page</a></p>
+<p><a th:href="@{/admin}">Admin Page</a></p>
+
+</body>
+</html>
