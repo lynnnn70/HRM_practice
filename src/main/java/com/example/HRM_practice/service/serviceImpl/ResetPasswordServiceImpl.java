@@ -15,7 +15,7 @@ public class ResetPasswordServiceImpl implements ResetPasswordService {
     private UsersRepository usersRepository;
 
     @Override
-    public Users checkPassword(Integer userId, Users user){
+    public Users checkPassword(Integer userId, String oldPassword){
         Optional<Users> usersOptional = usersRepository.findById(userId);
         return usersOptional.orElse(null);
         //   if(!usersOptional.isPresent()){
@@ -24,14 +24,15 @@ public class ResetPasswordServiceImpl implements ResetPasswordService {
         //        return usersOptional.get();
 
     }
-
     @Override
     public Users setNewPassword(Users user) {
-        //這邊要new嗎?
-        Users users = new Users();
-        users.setPassword(user.getPassword());
-        //其他兩個沒有set可以拿到原本的嗎??
-        return users;
+        Optional<Users> usersOptional = usersRepository.findById(user.getUserId());
+        usersOptional.ifPresent(existUser ->{
+            existUser.setPassword(user.getPassword());
+            usersRepository.save(existUser);
+        });
+           return usersOptional.orElse(null);
+
     }
 
 }

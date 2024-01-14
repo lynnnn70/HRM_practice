@@ -3,17 +3,13 @@ package com.example.HRM_practice.controller;
 import com.example.HRM_practice.common.CommonResponse;
 import com.example.HRM_practice.common.StatusCode;
 import com.example.HRM_practice.model.entity.Users;
-import com.example.HRM_practice.service.ResetPasswordService;
 import com.example.HRM_practice.service.serviceImpl.ResetPasswordServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -27,15 +23,30 @@ public class ResetPasswordController {
     private static final Logger log = LoggerFactory.getLogger(ResetPasswordController.class);
 
     //先輸入舊密碼，驗證是這個人的沒錯，再請他輸入新密碼
-    @PutMapping("resetPassword")
-    public ResponseEntity<CommonResponse<?>> resetPassword(@RequestBody Users user){
-        Users users = resetPasswordService.checkPassword(user.getUserId(), user);
-        if(users == null){
-            StatusCode statusCode = StatusCode.InvalidData;
+    @GetMapping("checkPassword")
+    public ResponseEntity<CommonResponse<?>> checkPassword(@RequestBody Users user){
+        Users storedUser = resetPasswordService.checkPassword(user.getUserId(), user.getPassword());
+        StatusCode statusCode = null;
+
+        if(storedUser == null){
+            statusCode = StatusCode.InvalidData;
             return generateResponse(statusCode, user.getUserId());
         }
-        StatusCode ok = StatusCode.OK;
-        return generateResponse(ok, users.getUserId());
+        if(!storedUser.getPassword().equals(user.getPassword())){
+            statusCode = StatusCode.InvalidData;
+            return generateResponse(statusCode, user.getUserId());
+        }
+        statusCode = StatusCode.OK;
+        return generateResponse(statusCode, storedUser.getUserId());
+
+    }
+
+
+    @PutMapping("setNewPassword")
+    public ResponseEntity<CommonResponse<?>> setNewPassword(@RequestBody String newPassword, Users user){
+        resetPasswordService.setNewPassword(user);
+        StatusCode statusCode = StatusCode.OK;
+        return generateResponse(statusCode, user.getUserId());
     }
 
     private ResponseEntity<CommonResponse<?>> generateResponse(StatusCode statusCode, Integer userId){
