@@ -1,5 +1,6 @@
 package com.example.HRM_practice.service.serviceImpl;
 
+import com.example.HRM_practice.common.StatusCode;
 import com.example.HRM_practice.model.entity.Users;
 import com.example.HRM_practice.model.repository.UsersRepository;
 import com.example.HRM_practice.service.ResetPasswordService;
@@ -15,24 +16,21 @@ public class ResetPasswordServiceImpl implements ResetPasswordService {
     private UsersRepository usersRepository;
 
     @Override
-    public Users checkPassword(Integer userId, String oldPassword){
+    public Users resetPassword(Integer userId, String keyOldPassword,
+                               String newPassword){
         Optional<Users> usersOptional = usersRepository.findById(userId);
-        return usersOptional.orElse(null);
-        //   if(!usersOptional.isPresent()){
-        //            return null;
-        //        }
-        //        return usersOptional.get();
-
+        if(!usersOptional.isPresent()){
+            return null;
+        }
+        Users users = usersOptional.get();
+        if(!users.getPassword().equals(keyOldPassword)){
+            return null;
+        }
+        users.setPassword(newPassword);
+        usersRepository.save(users);
+        return users;
     }
-    @Override
-    public Users setNewPassword(Users user) {
-        Optional<Users> usersOptional = usersRepository.findById(user.getUserId());
-        usersOptional.ifPresent(existUser ->{
-            existUser.setPassword(user.getPassword());
-            usersRepository.save(existUser);
-        });
-           return usersOptional.orElse(null);
 
-    }
+
 
 }

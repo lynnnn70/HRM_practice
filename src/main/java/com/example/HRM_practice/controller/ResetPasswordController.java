@@ -23,31 +23,28 @@ public class ResetPasswordController {
     private static final Logger log = LoggerFactory.getLogger(ResetPasswordController.class);
 
     //先輸入舊密碼，驗證是這個人的沒錯，再請他輸入新密碼
-    @GetMapping("checkPassword")
-    public ResponseEntity<CommonResponse<?>> checkPassword(@RequestBody Users user){
-        Users storedUser = resetPasswordService.checkPassword(user.getUserId(), user.getPassword());
-        StatusCode statusCode = null;
+    @PutMapping("resetPassword")
+    public ResponseEntity<CommonResponse<?>> resetPassword(@RequestBody Integer userId, String oldPassword,
+                                                           String newPassword, String newPasswordCheck){
 
-        if(storedUser == null){
+        StatusCode statusCode = null;
+        if(!newPassword.equals(newPasswordCheck)){
             statusCode = StatusCode.InvalidData;
-            return generateResponse(statusCode, user.getUserId());
+            return generateResponse(statusCode,userId);
         }
-        if(!storedUser.getPassword().equals(user.getPassword())){
+
+        Users user = resetPasswordService.resetPassword(userId, oldPassword, newPassword);
+
+        if(user == null){
             statusCode = StatusCode.InvalidData;
-            return generateResponse(statusCode, user.getUserId());
+            return generateResponse(statusCode, userId);
         }
         statusCode = StatusCode.OK;
-        return generateResponse(statusCode, storedUser.getUserId());
-
-    }
-
-
-    @PutMapping("setNewPassword")
-    public ResponseEntity<CommonResponse<?>> setNewPassword(@RequestBody String newPassword, Users user){
-        resetPasswordService.setNewPassword(user);
-        StatusCode statusCode = StatusCode.OK;
         return generateResponse(statusCode, user.getUserId());
+
     }
+
+
 
     private ResponseEntity<CommonResponse<?>> generateResponse(StatusCode statusCode, Integer userId){
         CommonResponse<?> response = new CommonResponse<>().setStatus(statusCode.getValue())
