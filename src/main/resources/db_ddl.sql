@@ -14,7 +14,7 @@ CREATE TABLE `users` (
                          `user_name` VARCHAR(50) NOT NULL,
                          `password` VARCHAR(100) NOT NULL,
                          PRIMARY KEY (`user_id`),
-                         UNIQUE KEY `user_name` (`password`)
+                         UNIQUE KEY `user_name` (`user_name`)
 );
 
 CREATE TABLE `roles` (
