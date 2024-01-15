@@ -22,7 +22,6 @@ public class ResetPasswordController {
 
     private static final Logger log = LoggerFactory.getLogger(ResetPasswordController.class);
 
-    //先輸入舊密碼，驗證是這個人的沒錯，再請他輸入新密碼
     @PutMapping("resetPassword")
     public ResponseEntity<CommonResponse<?>> resetPassword(@RequestBody Integer userId, String oldPassword,
                                                            String newPassword, String newPasswordCheck){

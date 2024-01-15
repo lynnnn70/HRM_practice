@@ -1,6 +1,5 @@
 package com.example.HRM_practice.service.serviceImpl;
 
-import com.example.HRM_practice.common.StatusCode;
 import com.example.HRM_practice.model.entity.Users;
 import com.example.HRM_practice.model.repository.UsersRepository;
 import com.example.HRM_practice.service.ResetPasswordService;
@@ -22,13 +21,13 @@ public class ResetPasswordServiceImpl implements ResetPasswordService {
         if(!usersOptional.isPresent()){
             return null;
         }
-        Users users = usersOptional.get();
-        if(!users.getPassword().equals(keyOldPassword)){
+        Users user = usersOptional.get();
+        if(!user.getPassword().equals(keyOldPassword)){
             return null;
         }
-        users.setPassword(newPassword);
-        usersRepository.save(users);
-        return users;
+        user.setPassword(newPassword);
+        usersRepository.save(user);
+        return user;
     }
 
 
