@@ -44,18 +44,18 @@ public class ResetPasswordController {
 
         //確認新的不能跟舊密碼一樣
         if(resetPasswordDto.getNewPassword().equals(resetPasswordDto.getOldPassword())){
-            return generateResponse(StatusCode.InvalidData, userId);
+            return generateResponse(StatusCode.Duplicate, userId);
         }
 
         //確認密碼輸入格式是否正確
         if(!isRegisterDataValid(resetPasswordDto)){
-            return generateResponse(StatusCode.InvalidData, userId);
+            return generateResponse(StatusCode.WrongFormat, userId);
         }
 
         //確認舊密碼是否輸入正確
         Users reset = resetPasswordService.resetPassword(userId, resetPasswordDto);
         if(reset == null){
-            return generateResponse(StatusCode.InvalidData, userId);
+            return generateResponse(StatusCode.NotFound, userId);
         }
         return generateResponse(StatusCode.OK, userId);
 
@@ -92,8 +92,12 @@ public class ResetPasswordController {
                 return "Internal_Error";
             case AccountUnavailable:
                 return "Account_Unavailable";
+            case NotFound:
+                return "Wrong_Password_NotFound";
             case Duplicate:
-                return "Duplicate";
+                return "Duplicate_Password";
+            case WrongFormat:
+                return "WrongFormat_Input";
             default:
                 log.warn("unknown_status :{}", statusCode);
                 return "Unknown_Status";
