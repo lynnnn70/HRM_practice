@@ -48,14 +48,6 @@ public class ResetPasswordServiceImpl implements ResetPasswordService {
         usersRepository.save(user);
         return user;
     }
-    //Todo 確認需不需要
-    private Users convert2Users(ResetPasswordDto resetPasswordDto){
-        Users user = new Users();
-        BeanUtils.copyProperties(resetPasswordDto, user);
-        user.setPassword(resetPasswordDto.getNewPasswordCheck());
-        return user;
-
-    }
 
 
 
