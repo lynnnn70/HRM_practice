@@ -10,7 +10,6 @@ public enum StatusCode {
     InvalidToken(-4),
     NotFound(-5), //錯誤的舊密碼 找不到
     Duplicate(-6), //新跟舊密碼一樣
-
     WrongFormat(-7); //輸入格式錯誤
 
 
