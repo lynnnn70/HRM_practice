@@ -39,7 +39,7 @@ public class ResetPasswordController {
 
         //確認輸入的兩個新密碼是否相同
         if(resetPasswordDto == null || !resetPasswordDto.getNewPassword().equals(resetPasswordDto.getNewPasswordCheck())){
-            return generateResponse(StatusCode.InvalidData, userId);
+            return generateResponse(StatusCode.InvalidPassword, userId);
         }
 
         //確認新的不能跟舊密碼一樣
@@ -98,6 +98,8 @@ public class ResetPasswordController {
                 return "Duplicate_Password";
             case WrongFormat:
                 return "WrongFormat_Input";
+            case InvalidPassword:
+                return "InvalidPassword_Input";
             default:
                 log.warn("unknown_status :{}", statusCode);
                 return "Unknown_Status";

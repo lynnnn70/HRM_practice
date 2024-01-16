@@ -1,11 +1,12 @@
 package com.example.HRM_practice.controller;
 
 import com.example.HRM_practice.common.CommonResponse;
+import com.example.HRM_practice.common.StatusCode;
+import com.example.HRM_practice.model.dto.AccessTokenDTO;
 import com.example.HRM_practice.model.entity.Users;
 import com.example.HRM_practice.service.serviceImpl.LoginServiceImpl;
 import com.example.HRM_practice.util.ValidateUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,20 +25,27 @@ public class LoginController {
     @Autowired
     private LoginServiceImpl loginService;
 
-//    public ResponseEntity<CommonResponse<?>> login (@RequestBody Users user){
+//    public ResponseEntity<CommonResponse<?>> login(@RequestBody Users user){
 //        log.debug("login data invalid, userName:{}", user.getUserName());
 //        if(!isLoginDataCorrect(user)){
-//            return ResponseEntity.badRequest().body()
+//            return ResponseEntity.badRequest().body(generateInvalidResponse());
 //        }
+//        return loginService.login(user)
+//                .map(AccessTokenDTO ::new)
 //
 //    }
-//
-//    private boolean isLoginDataCorrect(Users user){
-//        return ValidateUtil.isUserNameCorrect(user.getUserName())&&
-//                ValidateUtil.isPasswordCorrect(user.getPassword());
-//    }
+
+    private boolean isLoginDataCorrect(Users user){
+        return ValidateUtil.isUserNameCorrect(user.getUserName())&&
+                ValidateUtil.isPasswordCorrect(user.getPassword());
+    }
 
 
+    private CommonResponse<AccessTokenDTO> generateInvalidResponse(){
+        StatusCode statusCode = StatusCode.InvalidData;
+        return new CommonResponse<AccessTokenDTO>().setStatus(statusCode.getValue())
+                .setErrorMessage("username or password is incorrect");
+    }
 
 
 }
