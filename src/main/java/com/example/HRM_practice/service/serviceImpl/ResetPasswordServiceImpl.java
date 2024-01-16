@@ -45,8 +45,8 @@ public class ResetPasswordServiceImpl implements ResetPasswordService {
         //如果一樣就set再save
         user.setPassword(resetPasswordDto.getNewPasswordCheck());
 
-        usersRepository.save(user);
-        return user;
+        return usersRepository.save(user);
+
     }
 
 

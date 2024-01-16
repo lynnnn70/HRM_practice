@@ -30,15 +30,28 @@ public class ResetPasswordController {
     @PutMapping("resetPassword/{userId}")
     public ResponseEntity<CommonResponse<?>> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto,
                                                            @PathVariable Integer userId){
+//Todo
+//Authentication 是代表用戶的一個介面，principal代表當前使用者的身分，為獲取當前使用者Id，並將其存在loginUserId中
+//        public ResponseEntity<CommonResponse<?>> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto,
+//                @PathVariable Integer userId, Authentication authentication){
+//        final String loginUserId = (String) authentication.getPrincipal();
+//        log.debug("userId :{} resetPassword", loginUserId)
 
         //確認輸入的兩個新密碼是否相同
         if(resetPasswordDto == null || !resetPasswordDto.getNewPassword().equals(resetPasswordDto.getNewPasswordCheck())){
             return generateResponse(StatusCode.InvalidData, userId);
         }
+
+        //確認新的不能跟舊密碼一樣
+        if(resetPasswordDto.getNewPassword().equals(resetPasswordDto.getOldPassword())){
+            return generateResponse(StatusCode.InvalidData, userId);
+        }
+
         //確認密碼輸入格式是否正確
         if(!isRegisterDataValid(resetPasswordDto)){
             return generateResponse(StatusCode.InvalidData, userId);
         }
+
         //確認舊密碼是否輸入正確
         Users reset = resetPasswordService.resetPassword(userId, resetPasswordDto);
         if(reset == null){
