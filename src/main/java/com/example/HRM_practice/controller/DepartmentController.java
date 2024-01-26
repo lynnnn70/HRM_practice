@@ -1,5 +1,6 @@
 package com.example.HRM_practice.controller;
 
+import com.example.HRM_practice.common.ErrorMessage;
 import com.example.HRM_practice.response.DepartmentResponse;
 import com.example.HRM_practice.common.StatusCode;
 import com.example.HRM_practice.model.entity.Department;
@@ -53,7 +54,8 @@ public class DepartmentController {
 //    }
 
     private ResponseEntity<DepartmentResponse> generateResponse(StatusCode statusCode, Integer deptId){
-        DepartmentResponse response = new DepartmentResponse().setStatus(statusCode.getValue()).setErrorMessage(convertStatusToMessage(statusCode));
+        DepartmentResponse response = new DepartmentResponse().setStatus(statusCode.getValue())
+                                                              .setErrorMessage(ErrorMessage.convertStatus2Message(statusCode));
 
         switch(statusCode){
             case OK:
@@ -72,23 +74,6 @@ public class DepartmentController {
         }
     }
 
-    private String convertStatusToMessage(StatusCode statusCode){
-        switch (statusCode){
-            case OK:
-                return "success";
-            case InvalidData:
-                return "Invalid_Input";
-            case InternalError:
-                return "Internal_Error";
-            case AccountUnavailable:
-                return "Account_Unavailable";
-            case Duplicate:
-                return "Duplicate";
-            default:
-                log.warn("unknown_status :{}", statusCode);
-                return "Unknown_Status";
-        }
-    }
 
     @DeleteMapping("deleteDepartment/{deptId}")
     public ResponseEntity<?> deleteDepartment(@PathVariable Integer deptId){
