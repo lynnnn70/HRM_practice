@@ -4,6 +4,7 @@ import com.example.HRM_practice.common.CommonResponse;
 import com.example.HRM_practice.common.StatusCode;
 import com.example.HRM_practice.model.dto.ResetPasswordDto;
 import com.example.HRM_practice.model.entity.Users;
+import com.example.HRM_practice.response.ResetPasswordResponse;
 import com.example.HRM_practice.service.serviceImpl.ResetPasswordServiceImpl;
 import com.example.HRM_practice.util.ValidateUtil;
 import org.slf4j.Logger;
@@ -28,8 +29,8 @@ public class ResetPasswordController {
     private static final Logger log = LoggerFactory.getLogger(ResetPasswordController.class);
 
     @PutMapping("resetPassword/{userId}")
-    public ResponseEntity<CommonResponse<?>> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto,
-                                                           @PathVariable Integer userId){
+    public ResponseEntity<ResetPasswordResponse> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto,
+                                                               @PathVariable Integer userId){
 //Todo
 //Authentication 是代表用戶的一個介面，principal代表當前使用者的身分，為獲取當前使用者Id，並將其存在loginUserId中
 //        public ResponseEntity<CommonResponse<?>> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto,
@@ -63,8 +64,8 @@ public class ResetPasswordController {
 
 
 
-    private ResponseEntity<CommonResponse<?>> generateResponse(StatusCode statusCode, Integer userId){
-        CommonResponse<?> response = new CommonResponse<>().setStatus(statusCode.getValue())
+    private ResponseEntity<ResetPasswordResponse> generateResponse(StatusCode statusCode, Integer userId){
+        ResetPasswordResponse response = new ResetPasswordResponse().setStatus(statusCode.getValue())
                 .setErrorMessage(convertStatusToMessage(statusCode));
 
         switch (statusCode){

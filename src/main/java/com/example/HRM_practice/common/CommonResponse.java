@@ -21,6 +21,7 @@ public class CommonResponse<T extends CommonResponse<T, B>, B> {
         this.errorMessage = errorMessage;
     }
 
+
     //StatusCode.OK 返回的是 OK 這個列舉型別的實例
     //先定義預設為status.OK，因此在new CommonResponse時，若結果為成功時就不須再重覆寫 EX:
     //寫 CommonResponse<String> defaultResponse = new CommonResponse<>();

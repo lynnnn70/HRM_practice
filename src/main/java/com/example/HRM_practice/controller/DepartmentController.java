@@ -1,6 +1,6 @@
 package com.example.HRM_practice.controller;
 
-import com.example.HRM_practice.common.CommonResponse;
+import com.example.HRM_practice.response.DepartmentResponse;
 import com.example.HRM_practice.common.StatusCode;
 import com.example.HRM_practice.model.entity.Department;
 import com.example.HRM_practice.service.serviceImpl.DepartmentServiceImpl;
@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -28,20 +27,17 @@ public class DepartmentController {
 
     //{}是佔位符，當訊息被寫入時{}將被替換為相應的值
     @PostMapping("addDepartment")
-    public ResponseEntity<CommonResponse<?>> addDepartment(@RequestBody Department department){
+    public ResponseEntity<DepartmentResponse> addDepartment(@RequestBody Department department){
 
         log.info("Attempting to department with data:{}", department);
 
-        Department addDepartment = departmentService.addDepartment((department));
-        if(addDepartment == null){
+        Department newDepartment = departmentService.addDepartment((department));
+        if(newDepartment == null){
             log.info("Duplicate input:{}", department);
             return generateResponse(StatusCode.Duplicate, department.getDeptId());
         }
-
-        CommonResponse<Department> objectCommonResponse = new CommonResponse<>();
-        objectCommonResponse.setBody(addDepartment);
-
-        log.info("Department added successfully. Add department:{}", objectCommonResponse);
+        DepartmentResponse response = new DepartmentResponse();
+        log.info("Department added successfully. Add department:{}", response);
         return generateResponse(StatusCode.OK, department.getDeptId());
     }
 //    public ResponseEntity<Department> addDepartment(@RequestBody Department department){
@@ -56,8 +52,8 @@ public class DepartmentController {
 //        return new ResponseEntity<>(addedDepartment, HttpStatus.CREATED);
 //    }
 
-    private ResponseEntity<CommonResponse<?>> generateResponse(StatusCode statusCode, Integer deptId){
-        CommonResponse<?> response = new CommonResponse<>().setStatus(statusCode.getValue()).setErrorMessage(convertStatusToMessage(statusCode));
+    private ResponseEntity<DepartmentResponse> generateResponse(StatusCode statusCode, Integer deptId){
+        DepartmentResponse response = new DepartmentResponse().setStatus(statusCode.getValue()).setErrorMessage(convertStatusToMessage(statusCode));
 
         switch(statusCode){
             case OK:

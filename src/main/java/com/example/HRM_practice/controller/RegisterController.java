@@ -1,7 +1,7 @@
 package com.example.HRM_practice.controller;
 
-import com.example.HRM_practice.common.CommonResponse;
 import com.example.HRM_practice.common.StatusCode;
+import com.example.HRM_practice.response.UsersResponse;
 import com.example.HRM_practice.exception.AccountUnavaliableException;
 import com.example.HRM_practice.model.entity.Users;
 import com.example.HRM_practice.service.serviceImpl.RegisterServiceImpl;
@@ -28,15 +28,13 @@ public class RegisterController {
     public static final Logger log = LoggerFactory.getLogger(RegisterController.class);
 
     @PostMapping("register")
-    public ResponseEntity<CommonResponse<?>> register(@RequestBody Users user) throws AccountUnavaliableException{
+    public ResponseEntity<UsersResponse> register(@RequestBody Users user) throws AccountUnavaliableException{
         StatusCode statusCode;
         Integer userId = null;
+        //Check Regex
         if(!isRegisterDataValid(user)){
-            statusCode = StatusCode.InvalidData;
-            log.debug("123");
-            System.out.println(statusCode);
             log.debug("invalid data when register,{}", user);
-            return generateResponse(statusCode, userId);
+            return generateResponse(StatusCode.InvalidData, null);
         }
         try {
             userId = registerService.register(user);
@@ -44,16 +42,13 @@ public class RegisterController {
             return generateResponse(StatusCode.OK, user.getUserId());
         }catch (AccountUnavaliableException ae){
             statusCode = StatusCode.InvalidData;
-//            return generateResponse(statusCode, user.getUserId());
+            log.warn("username unavailable:" + user.getUserName(), user.getPassword(), ae);
+            return generateResponse(statusCode, null);
         }catch (Exception e){
-            log.warn("username unavailable123:" + user.getUserName(), user.getPassword(), e);
             log.warn("error when register", e);
             statusCode = StatusCode.InvalidData;
-//            return generateResponse(statusCode,user.getUserId());
+            return generateResponse(statusCode,null);
         }
-            log.debug("end of register. StatusCode:{}, UserId:{}", statusCode, userId);
-        return generateResponse(statusCode, userId);
-
     }
 
     private boolean isRegisterDataValid(Users users){
@@ -62,10 +57,9 @@ public class RegisterController {
         return ValidateUtil.isUserNameCorrect(username) && ValidateUtil.isPasswordCorrect(password);
     }
 
-    private ResponseEntity<CommonResponse<?>> generateResponse(StatusCode statusCode, Integer userId){
-        CommonResponse<?> response = new CommonResponse<>().setStatus(statusCode.getValue())
-                .setErrorMessage(convertStatusToMessage(statusCode));
-
+    private ResponseEntity<UsersResponse> generateResponse(StatusCode statusCode, Integer userId){
+        UsersResponse response = new UsersResponse().setStatus(statusCode.getValue())
+                                                              .setErrorMessage(convertStatusToMessage((statusCode)));
         switch (statusCode){
             case OK:
                 return ResponseEntity.created(URI.create("/api/users/" + userId)).body(response);
