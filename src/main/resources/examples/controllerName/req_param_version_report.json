@@ -1,0 +1,30 @@
+{
+   "meta":{
+      "source":{
+         "channel":"3",
+         "system":"IRS",
+         "location":"OMC",
+         "host":"10.0.65.195"
+      }
+   },
+   "body":{
+      "type":"ParamVersionReport",
+      "data":{
+         "stationId":"11",
+         "equipId":"4353",
+         "equipType":2,
+         "sysId":"0",
+         "reportTime":"2022-08-20T03:00:04",
+         "versions":[
+            {
+               "paramId":"74",
+               "version":"154"
+            },
+            {
+               "paramId":"75",
+               "version":"188"
+            }
+         ]
+      }
+   }
+}
