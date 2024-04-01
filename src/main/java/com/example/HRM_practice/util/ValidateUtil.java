@@ -4,8 +4,8 @@ import java.util.regex.Pattern;
 
 public class ValidateUtil {
 
-    public static  final String USERNAME_REGEX = "^[a-zA-Z0-9]{5,15}$";
-    public static  final String PASSWORD_REGEX = "^[a-zA-Z0-9]{5,30}$";
+    public static final String USERNAME_REGEX = "^[a-zA-Z0-9]{5,15}$";
+    public static final String PASSWORD_REGEX = "^[a-zA-Z0-9]{5,30}$";
 
 
     public static boolean isUserNameCorrect(String userName){

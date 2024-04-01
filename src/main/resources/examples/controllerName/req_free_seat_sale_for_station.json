@@ -1,0 +1,17 @@
+{
+   "meta":{
+      "source":{
+         "channel":"3",
+         "system":"IRS",
+         "location":"OMC",
+         "host":"10.0.65.195"
+      }
+   },
+   "body":{
+      "type":"FreeSeatSaleForStation",
+      "data":{
+         "station":"05",
+         "enabled":false
+      }
+   }
+}

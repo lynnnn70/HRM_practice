@@ -3,7 +3,7 @@ package com.example.HRM_practice.common;
 import com.sun.istack.NotNull;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-public class CommonResponse<T> {
+public class CommonResponse<T extends CommonResponse<T, B>, B> {
 
     @NotNull
     @Schema(description = "status number")
@@ -21,6 +21,7 @@ public class CommonResponse<T> {
         this.errorMessage = errorMessage;
     }
 
+
     //StatusCode.OK 返回的是 OK 這個列舉型別的實例
     //先定義預設為status.OK，因此在new CommonResponse時，若結果為成功時就不須再重覆寫 EX:
     //寫 CommonResponse<String> defaultResponse = new CommonResponse<>();
@@ -33,27 +34,27 @@ public class CommonResponse<T> {
         return status;
     }
 
-    public CommonResponse<T> setStatus(Integer status) {
+    public T setStatus(Integer status) {
         this.status = status;
-        return this;
+        return (T)this;
     }
 
     public String getErrorMessage() {
         return errorMessage;
     }
 
-    public CommonResponse<T> setErrorMessage(String errorMessage) {
+    public T setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
-        return this;
+        return (T)this;
     }
 
     public T getBody() {
         return body;
     }
 
-    public CommonResponse<T> setBody(T body) {
+    public T setBody(T body) {
         this.body = body;
-        return this;
+        return (T)this;
     }
 
     @Override

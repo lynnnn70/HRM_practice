@@ -6,8 +6,8 @@ INSERT INTO `users` (`user_name`, `password`) VALUES
 
 
 INSERT INTO `roles` (`role_name`) VALUES
-                                 ('ROLE_ADMIN'),
-                                 ('ROLE_USER_E'),
+                                 ('ROLE_ADMIN'), --可授權、可取消授權
+                                 ('ROLE_USER_E'), --可新增、可刪除
                                  ('ROLE_USER_D'),
                                  ('ROLE_USER_S');
 

@@ -8,8 +8,15 @@ public enum StatusCode {
     InternalError(-2),
     AccountUnavailable(-3),
     InvalidToken(-4),
-    NotFound(-5),
-    Duplicate(-6);
+    NotFound(-5), //錯誤的舊密碼 找不到
+    Duplicate(-6), //新跟舊密碼一樣
+    WrongFormat(-7), //輸入格式錯誤
+    InvalidPassword(-8); //輸入密碼不一致，更改無效
+
+
+
+
+
 
     private final int value;
 
